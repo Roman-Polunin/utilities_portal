@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+Категории новостей
+{% endblock title %}
+
+{% block content %}
+<h1>Категории новостей</h1>
+
+<form action="{% url 'categories' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<div class="container">
+    <div class="col-sm", style="margin-top:50px">
+        {% for cat in filterset.form.categories %}
+            <div class="row">
+                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                    <span>{{ cat.choice_label }}</span>
+                    <input id="{{ cat.pk }}"  type="checkbox" name="{{ cat.name }}" value="{{ cat.choice_value }}">
+                </div>
+            </div>
+        {% endfor %}
+        <div ><button type="submit" style="max-width: 7rem;">Subscribes</button></div>
+    </div>
+</div>
+</form>
+{% endblock content %}
